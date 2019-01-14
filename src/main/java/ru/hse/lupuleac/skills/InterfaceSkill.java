@@ -7,7 +7,7 @@ public class InterfaceSkill extends Skill {
     @Override
     public void visit(ClassOrInterfaceDeclaration n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(n.isInterface());
+        incrementScore(n.isInterface(), "interface");
     }
 
     @Override

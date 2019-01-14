@@ -10,13 +10,13 @@ public class AbstractClassSkill extends Skill {
     @Override
     public void visit(MethodDeclaration c, JavaParserFacade arg) {
         super.visit(c, arg);
-        incrementScore(c.isAbstract());
+        incrementScore(c.isAbstract(), "method");
     }
 
     @Override
     public void visit(ClassOrInterfaceDeclaration c, JavaParserFacade arg) {
         super.visit(c, arg);
-        incrementScore(c.isAbstract());
+        incrementScore(c.isAbstract(), "class");
     }
 
     @Override

@@ -13,16 +13,18 @@ import com.github.javaparser.resolution.types.ResolvedReferenceType;
 import com.github.javaparser.symbolsolver.javaparsermodel.JavaParserFacade;
 import com.github.javaparser.symbolsolver.model.resolution.SymbolReference;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class Skill extends VoidVisitorAdapter<JavaParserFacade> {
-    protected int score;
-    protected int minScore;
+    private Set<String> grainSkills = new HashSet<>();
     public int getScore() {
-        return score - minScore;
+        return grainSkills.size();
     }
 
-    protected void incrementScore(boolean isIncremented) {
+    protected void incrementScore(boolean isIncremented, String grain) {
         if(isIncremented) {
-            score++;
+            grainSkills.add(grain);
         }
     }
 
@@ -35,7 +37,7 @@ public abstract class Skill extends VoidVisitorAdapter<JavaParserFacade> {
             }
             String qualifiedName = solved.getCorrespondingDeclaration()
                     .getQualifiedName();
-            incrementScore(qualifiedName.matches(regex));
+            incrementScore(qualifiedName.matches(regex), qualifiedName);
         } catch (Exception e) {
            //System.out.println("!!!!! " + n.getName());
         }
@@ -47,31 +49,34 @@ public abstract class Skill extends VoidVisitorAdapter<JavaParserFacade> {
     }
 
     protected void hasAncestor(String ancestor, ClassOrInterfaceDeclaration n, JavaParserFacade javaParserFacade) {
+        String grain = "ancestor#" + ancestor;
         try {
             incrementScore(javaParserFacade.getTypeDeclaration(n).getAllAncestors().stream().
-                    map(ResolvedReferenceType::getQualifiedName).anyMatch(x -> x.equals(ancestor)));
+                    map(ResolvedReferenceType::getQualifiedName).anyMatch(x -> x.equals(ancestor)), grain);
         } catch (Exception e) {
-            incrementScore(n.getImplementedTypes().stream().anyMatch(x -> ancestor.matches("(.*)\\." + x)));
-            incrementScore(n.getExtendedTypes().stream().anyMatch(x -> ancestor.matches("(.*)\\." + x)));
+            incrementScore(n.getImplementedTypes().stream().anyMatch(x -> ancestor.matches("(.*)\\." + x)), grain);
+            incrementScore(n.getExtendedTypes().stream().anyMatch(x -> ancestor.matches("(.*)\\." + x)), grain);
         }
     }
 
     protected void hasParent(String ancestor, ClassOrInterfaceDeclaration n, JavaParserFacade javaParserFacade) {
+        String grain = "ancestor#" + ancestor;
         try {
             incrementScore(javaParserFacade.getTypeDeclaration(n).getAncestors().stream().
-                    map(ResolvedReferenceType::getQualifiedName).anyMatch(x -> x.equals(ancestor)));
+                    map(ResolvedReferenceType::getQualifiedName).anyMatch(x -> x.equals(ancestor)), grain);
         } catch (Exception e) {
-            incrementScore(n.getImplementedTypes().stream().anyMatch(x -> ancestor.matches("(.*)\\." + x)));
-            incrementScore(n.getExtendedTypes().stream().anyMatch(x -> ancestor.matches("(.*)\\." + x)));
+            incrementScore(n.getImplementedTypes().stream().anyMatch(x -> ancestor.matches("(.*)\\." + x)), grain);
+            incrementScore(n.getExtendedTypes().stream().anyMatch(x -> ancestor.matches("(.*)\\." + x)), grain);
         }
     }
 
     protected void isSpecifiedObjectCreation(String className, ObjectCreationExpr n, JavaParserFacade arg){
+        String grain = "new#" + className;
         try {
             ResolvedClassDeclaration type = arg.solve(n).getCorrespondingDeclaration().declaringType();
             if (type.isClass()) {
-                incrementScore(type.asClass().getQualifiedName().equals(className));
-                incrementScore(type.getSuperClass().getQualifiedName().equals(className));
+                incrementScore(type.asClass().getQualifiedName().equals(className), grain);
+                incrementScore(type.getSuperClass().getQualifiedName().equals(className), grain);
             }
         } catch (Exception e) {
             //System.err.println("Cannot resolve " + n);
@@ -79,6 +84,10 @@ public abstract class Skill extends VoidVisitorAdapter<JavaParserFacade> {
     }
 
     public void clear() {
-        score = 0;
+        grainSkills.clear();
+    }
+
+    public Set<String> getGrainSkills() {
+        return grainSkills;
     }
 }

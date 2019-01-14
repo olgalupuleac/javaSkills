@@ -6,7 +6,7 @@ import com.github.javaparser.symbolsolver.javaparsermodel.JavaParserFacade;
 public class MethodReferenceSkill extends Skill {
     @Override
     public void visit(MethodReferenceExpr n, JavaParserFacade arg) {
-        incrementScore(true);
+        incrementScore(true, "ref");
     }
 
     @Override

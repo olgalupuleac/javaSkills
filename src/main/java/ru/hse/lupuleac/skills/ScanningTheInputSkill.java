@@ -22,7 +22,7 @@ public class ScanningTheInputSkill extends Skill {
     @Override
     public void visit(ObjectCreationExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(n.getArguments().stream().map(Node::toString).anyMatch(x -> x.equals("System.in")));
+        incrementScore(n.getArguments().stream().map(Node::toString).anyMatch(x -> x.equals("System.in")), "System.in");
     }
 
     @Override

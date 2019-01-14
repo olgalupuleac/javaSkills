@@ -8,7 +8,7 @@ public class ExceptionHandlingSkill extends Skill {
     @Override
     public void visit(CatchClause n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(n.getBody().getStatements().size() > 0);
+        incrementScore(n.getBody().getStatements().size() > 0, "catch");
     }
 
     @Override

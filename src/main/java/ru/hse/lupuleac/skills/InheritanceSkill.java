@@ -8,14 +8,14 @@ public class InheritanceSkill extends Skill {
     @Override
     public void visit(SuperExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "super");
     }
 
     @Override
     public void visit(ClassOrInterfaceDeclaration n, JavaParserFacade arg) {
         super.visit(n, arg);
         try {
-            incrementScore(arg.getTypeDeclaration(n).getAllAncestors().size() > 1);
+            incrementScore(arg.getTypeDeclaration(n).getAllAncestors().size() > 1, "declaration");
         } catch (Exception e) {
             n.getExtendedTypes().forEach(System.out::println);
             n.getImplementedTypes().forEach(System.out::println);

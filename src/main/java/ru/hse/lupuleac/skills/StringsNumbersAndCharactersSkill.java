@@ -15,18 +15,18 @@ public class StringsNumbersAndCharactersSkill extends Skill {
     @Override
     public void visit(IntegerLiteralExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "int");
     }
 
     @Override
     public void visit(CharLiteralExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "char");
     }
 
     @Override
     public void visit(StringLiteralExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "string");
     }
 }

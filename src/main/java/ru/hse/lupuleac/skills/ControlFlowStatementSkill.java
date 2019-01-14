@@ -6,44 +6,44 @@ import com.github.javaparser.symbolsolver.javaparsermodel.JavaParserFacade;
 public class ControlFlowStatementSkill extends Skill {
     @Override
     public void visit(BreakStmt n, JavaParserFacade arg) {
-        incrementScore(true);
+        incrementScore(true, "break");
     }
 
     @Override
     public void visit(ContinueStmt n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "continue");
     }
 
-    /*@Override
+    @Override
     public void visit(ReturnStmt n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
-    }*/
+        incrementScore(true, "return");
+    }
 
     @Override
     public void visit(SwitchStmt n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "switch");
     }
-/*
+
     @Override
     public void visit(WhileStmt n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "while");
     }
 
     @Override
     public void visit(IfStmt n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "if");
     }
 
     @Override
     public void visit(ForStmt n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
-    }*/
+        incrementScore(true, "for");
+    }
 
     @Override
     public String toString() {

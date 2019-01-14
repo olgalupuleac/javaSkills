@@ -7,7 +7,7 @@ public class AnonymousClassSkill extends Skill {
     @Override
     public void visit(ObjectCreationExpr n, JavaParserFacade javaParserFacade){
         super.visit(n, javaParserFacade);
-        incrementScore(n.getAnonymousClassBody().isPresent());
+        incrementScore(n.getAnonymousClassBody().isPresent(), "anon");
     }
 
     @Override

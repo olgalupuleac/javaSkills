@@ -7,7 +7,7 @@ public class ConstructorSkill extends Skill {
     @Override
     public void visit(ConstructorDeclaration n, JavaParserFacade javaParserFacade) {
         super.visit(n, javaParserFacade);
-        incrementScore(true);
+        incrementScore(true, "constructor");
     }
 
     @Override

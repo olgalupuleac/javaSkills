@@ -9,13 +9,13 @@ public class TypeCastingSkill extends Skill {
     @Override
     public void visit(CastExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "cast");
     }
 
     @Override
     public void visit(InstanceOfExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "instanceOf");
     }
 
     @Override

@@ -20,7 +20,7 @@ public class RegexSkill extends Skill {
         try {
             String name = arg.solve(n).getCorrespondingDeclaration()
                     .getQualifiedName();
-            incrementScore(Stream.of(regexMethodPatterns).anyMatch(name::matches));
+            incrementScore(Stream.of(regexMethodPatterns).anyMatch(name::matches), name);
         } catch (Exception ignored) {
         }
     }

@@ -8,7 +8,7 @@ public class ExceptionsSkill extends Skill {
     @Override
     public void visit(ThrowStmt n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "throw");
     }
 
     @Override

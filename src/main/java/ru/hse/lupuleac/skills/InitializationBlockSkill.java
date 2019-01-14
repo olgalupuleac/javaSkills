@@ -7,7 +7,7 @@ public class InitializationBlockSkill extends Skill {
     @Override
     public void visit(InitializerDeclaration n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "init");
     }
 
     @Override

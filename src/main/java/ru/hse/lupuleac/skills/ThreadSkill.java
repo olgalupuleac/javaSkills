@@ -21,7 +21,7 @@ public class ThreadSkill extends Skill {
     @Override
     public void visit(SynchronizedStmt n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "synchronized");
     }
 
     @Override

@@ -1,5 +1,6 @@
 package ru.hse.lupuleac.skills;
 
+import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.expr.ArrayAccessExpr;
 import com.github.javaparser.ast.expr.ArrayCreationExpr;
 import com.github.javaparser.ast.expr.ArrayInitializerExpr;
@@ -9,26 +10,26 @@ public class ArraySkill extends Skill {
     @Override
     public void visit(ArrayAccessExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "access");
     }
 
     @Override
     public void visit(ArrayCreationExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "creation");
     }
 
     @Override
     public void visit(ArrayInitializerExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "initializer");
     }
 
-    /*@Override
+    @Override
     public void visit(Parameter n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(n.getType().isArrayType());
-    }*/
+        incrementScore(n.getType().isArrayType(), "parameter");
+    }
 
     @Override
     public String toString() {

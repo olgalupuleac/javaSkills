@@ -21,14 +21,14 @@ public class LogicalOperationsSkill extends Skill {
         super.visit(n, arg);
         try {
             boolean isBool = arg.getType(n.getRight()).describe().toLowerCase().contains("boolean");
-            incrementScore(isBool && Arrays.asList(logicalOperators).contains(n.getOperator()));
+            incrementScore(isBool && Arrays.asList(logicalOperators).contains(n.getOperator()), n.getOperator().asString());
         } catch (Exception ignored) {}
     }
 
     @Override
     public void visit(UnaryExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(n.getOperator() == UnaryExpr.Operator.LOGICAL_COMPLEMENT);
+        incrementScore(n.getOperator() == UnaryExpr.Operator.LOGICAL_COMPLEMENT, n.getOperator().asString());
     }
 
     @Override

@@ -8,7 +8,7 @@ public class WildcardSkill extends Skill {
     @Override
     public void visit(WildcardType n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, "wildcard");
     }
 
     @Override

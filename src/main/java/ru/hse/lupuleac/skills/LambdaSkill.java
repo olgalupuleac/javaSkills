@@ -7,7 +7,7 @@ public class LambdaSkill extends Skill {
     @Override
     public void visit(LambdaExpr n, JavaParserFacade javaParserFacade) {
         super.visit(n, javaParserFacade);
-        incrementScore(true);
+        incrementScore(true, "lambda");
     }
 
     @Override

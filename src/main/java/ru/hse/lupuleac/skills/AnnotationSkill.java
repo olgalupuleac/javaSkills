@@ -9,19 +9,19 @@ public class AnnotationSkill extends Skill  {
     @Override
     public void visit(AnnotationDeclaration n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, n.getNameAsString());
     }
 
     @Override
     public void visit(AnnotationMemberDeclaration n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, n.getNameAsString());
     }
 
     @Override
     public void visit(MarkerAnnotationExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(true);
+        incrementScore(true, n.getNameAsString());
     }
 
     @Override

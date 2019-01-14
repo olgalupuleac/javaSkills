@@ -11,7 +11,7 @@ public class CodeStyleSkill extends Skill {
 
     @Override
     public void visit(JavadocComment n, JavaParserFacade arg) {
-        incrementScore(true);
+        incrementScore(true, "j");
     }
     //TODO camel case
 }

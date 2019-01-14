@@ -22,7 +22,7 @@ public class BitOperationsSkill extends Skill {
         super.visit(n, arg);
         try {
             boolean isBool = arg.getType(n.getRight()).describe().toLowerCase().contains("boolean");
-            incrementScore(!isBool && Arrays.asList(bitOperators).contains(n.getOperator()));
+            incrementScore(!isBool && Arrays.asList(bitOperators).contains(n.getOperator()), n.getOperator().asString());
         } catch (Exception ignored) {
             //System.err.println("Cannot solve " + n);
         }
@@ -31,7 +31,7 @@ public class BitOperationsSkill extends Skill {
     @Override
     public void visit(UnaryExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(n.getOperator() == UnaryExpr.Operator.BITWISE_COMPLEMENT);
+        incrementScore(n.getOperator() == UnaryExpr.Operator.BITWISE_COMPLEMENT, n.getOperator().asString());
     }
 
     @Override
@@ -39,7 +39,7 @@ public class BitOperationsSkill extends Skill {
         super.visit(n, arg);
         try {
             boolean isBool = arg.getType(n.getTarget()).describe().toLowerCase().contains("boolean");
-            incrementScore(!isBool && Arrays.asList(bitAssignOperators).contains(n.getOperator()));
+            incrementScore(!isBool && Arrays.asList(bitAssignOperators).contains(n.getOperator()), n.getOperator().asString());
         } catch (Exception ignored) {
         }
     }

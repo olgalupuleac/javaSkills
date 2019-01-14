@@ -12,6 +12,6 @@ public class OverridingSkill extends Skill {
     @Override
     public void visit(MarkerAnnotationExpr n, JavaParserFacade arg) {
         super.visit(n, arg);
-        incrementScore(n.getNameAsString().equals("Override"));
+        incrementScore(n.getNameAsString().equals("Override"), "annotation");
     }
 }
